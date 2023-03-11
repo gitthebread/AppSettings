@@ -25,6 +25,7 @@ public class MySettingsFragment extends PreferenceFragmentCompat{
     String[] colorValues;
     String[] colorTitles;
     int index;
+    String currentNumber;
 
     public MySettingsFragment(Context _context) {
         this.context = _context;
@@ -39,37 +40,27 @@ public class MySettingsFragment extends PreferenceFragmentCompat{
 
 
         ListPreference displayedColor = (ListPreference) findPreference("displayedColor");
-        displayedColor.setEntryValues(colorValues);
-        CharSequence currentColor = displayedColor.getEntry();
-        displayedColor.setSummary(currentColor);
+        if (displayedColor != null) {
+            displayedColor.setEntryValues(colorValues);
+            CharSequence currentColor = displayedColor.getEntry();
+            displayedColor.setSummary(currentColor);
+        }
 
         EditTextPreference displayedNumber = (EditTextPreference) findPreference("displayedNumber");
-        String currentNumber = displayedNumber.getText();
-        displayedNumber.setSummary(currentNumber);
+        if (displayedNumber != null) {
+            currentNumber = displayedNumber.getText();
+            displayedNumber.setSummary(currentNumber);
+        }
 
-        displayedNumber.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
-                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("displayedNumber", String.valueOf(newValue));
-                editor.apply();
-                preference.setSummary(String.valueOf(newValue));
-                return true;
-            }
+        displayedNumber.setOnPreferenceChangeListener((preference, newValue) -> {
+            preference.setSummary(String.valueOf(newValue));
+            return true;
         });
 
-        displayedColor.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
-            @Override
-            public boolean onPreferenceChange(@NonNull Preference preference, Object newValue) {
-                SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(context);
-                SharedPreferences.Editor editor = pref.edit();
-                editor.putString("displayedColor", String.valueOf(newValue));
-                editor.apply();
-                index = displayedColor.findIndexOfValue(String.valueOf(newValue));
-                preference.setSummary(colorTitles[index]);
-                return true;
-            }
+        displayedColor.setOnPreferenceChangeListener((preference, newValue) -> {
+            index = displayedColor.findIndexOfValue(String.valueOf(newValue));
+            preference.setSummary(colorTitles[index]);
+            return true;
         });
     }
 }
