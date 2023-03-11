@@ -14,17 +14,14 @@ import android.widget.TextView;
 
 public class SettingsActivity extends AppCompatActivity {
 
-    TextView txtview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Context appContext = getApplicationContext();
-
         setContentView(R.layout.activity_settings);
         getSupportFragmentManager().beginTransaction()
-                .replace(android.R.id.content, new MySettingsFragment(appContext))
+                .replace(android.R.id.content, new MySettingsFragment())
                 .commit();
         PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 

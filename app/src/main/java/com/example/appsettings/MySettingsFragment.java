@@ -21,15 +21,10 @@ import java.util.Objects;
 
 public class MySettingsFragment extends PreferenceFragmentCompat{
 
-    Context context;
     String[] colorValues;
     String[] colorTitles;
     int index;
     String currentNumber;
-
-    public MySettingsFragment(Context _context) {
-        this.context = _context;
-    }
 
     @Override
     public void onCreatePreferences(@Nullable Bundle savedInstanceState, @Nullable String rootKey) {
