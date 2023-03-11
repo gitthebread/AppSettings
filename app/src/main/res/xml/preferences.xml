@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="Saved Values"
+        android:icon="@drawable/ic_settings">
+
+        <EditTextPreference
+            android:maxLines = "1"
+            android:inputType = "number"
+            android:key="displayedNumber"
+            android:title="Saved number"
+            android:summary="0" />
+
+        <ListPreference
+            android:defaultValue="-1"
+            android:key="displayedColor"
+            android:title="Saved Color"
+            android:entries="@array/prefListTitle"
+            android:summary="No color saved"/>
+    </PreferenceCategory>
+</PreferenceScreen>
